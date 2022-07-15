@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 257bc5e711c65da49b83839f79691e52, type: 3}
   m_Name: TestTower
   m_EditorClassIdentifier: 
-  range: 10
+  range: 2
   setupTime: 5
   cooldown: 1
   turningSpeed: 200
