@@ -6,28 +6,28 @@ using UnityEngine.Events;
 
 public class towerAction : MonoBehaviour
 {
-    towerScriptableObject prefab;
+    public towerScriptableObject prefab;
 
     public int layer;
     public Vector2Int pos;
     public float viewDirection;
 
-    public bool isSettingup;
+    public bool isSetup = false;
     //wird beim platzieren des turms aufgerufen
-    UnityEvent onSetup;
+    public UnityEvent onSetup;
     //wird auffgerufen, sobald die setup time nach dem setup aufruf vorbei ist
-    UnityEvent onSetupFinisch;
+    public UnityEvent onSetupFinisch;
 
     public bool isShooting;
     //wir mit dem schieß befehl aufgeruen
-    UnityEvent onShoot;
+    public UnityEvent onShoot;
     //wird aufgerufen, sobald der schießcooldown abgelaufen ist
-    UnityEvent onShootFinisch;
+    public UnityEvent onShootFinisch;
 
     //wir aufgerufen sobald ein neues ziel eingetragen ist
-    UnityEvent onLookOn;
+    public UnityEvent onLookOn;
     //wird jeden frame aufgerufen, der das target anvisiert
-    UnityEvent onLookOnIsOn;
+    public UnityEvent onLookOnIsOn;
     
     //read only
     public ITarget target;
@@ -40,13 +40,13 @@ public class towerAction : MonoBehaviour
     //Setup call
     public void Setup()
     {
-        isSettingup = true;
+        isSetup = false;
         onSetup.Invoke();
         StartCoroutine(setupFinischEnum());
     }
     private void SetupFinisch()
     {
-        isSettingup = false;
+        isSetup = true;
         onSetupFinisch.Invoke();
     }
     IEnumerator setupFinischEnum()
@@ -57,9 +57,12 @@ public class towerAction : MonoBehaviour
 
     public void Shoot()
     {
+        if (target == null)
+            return;
         if(isShooting)
             return;
         isShooting = true;
+        Debug.Log("Shoot");
         onShoot.Invoke();
         StartCoroutine(ShotFinischEnum());
     }
@@ -76,7 +79,7 @@ public class towerAction : MonoBehaviour
 
     private void Update()
     {
-        if (isSettingup)
+        if (!isSetup)
             return;
         if (target == null)
         {
@@ -85,9 +88,14 @@ public class towerAction : MonoBehaviour
                 return;
             setTarget(t[0]);
         }
+        else if (Vector2.Distance(target.getPosition(), pos) > prefab.range)
+        {
+            target = null;
+        }
         else
         {
-            float requiredAngle = Vector2.Angle(Vector2.up, target.getPosition() - pos) % 360;
+            float requiredAngle = Vector2.SignedAngle(Vector2.up, target.getPosition() - pos) % 360;
+            //float requiredAngle = Vector2.Angle(Vector2.up, target.getPosition() - pos);
             float correction = requiredAngle - viewDirection;
             if(correction > 180 || correction < 0)
             {

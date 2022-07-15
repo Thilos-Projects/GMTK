@@ -9,4 +9,7 @@ public class towerScriptableObject : ScriptableObject
     public float setupTime;
     public float cooldown;
     public float turningSpeed;
+    public Sprite body;
+    public Sprite turret;
+    public Sprite bullet;
 }

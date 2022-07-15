@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(towerAction))]
 public class towerLoadScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public towerScriptableObject prefab;
+
+    public SpriteRenderer bodySprite;
+    public SpriteRenderer turretSprite;
+
+    towerAction actionScript;
+
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        actionScript = gameObject.GetComponent<towerAction>();
+        actionScript.layer = 0;
+        actionScript.pos = new Vector2Int((int)transform.position.x, (int)transform.position.y);
+        actionScript.viewDirection = 0;
+        actionScript.prefab = prefab;
+        bodySprite.sprite = prefab.body;
+        turretSprite.sprite = prefab.turret;
+        actionScript.Setup();
     }
 }
