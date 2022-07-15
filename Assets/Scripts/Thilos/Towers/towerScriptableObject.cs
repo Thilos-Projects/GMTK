@@ -11,5 +11,6 @@ public class towerScriptableObject : ScriptableObject
     public float turningSpeed;
     public Sprite body;
     public Sprite turret;
-    public Sprite bullet;
+
+    public bulletScriptableObject bullet;
 }
