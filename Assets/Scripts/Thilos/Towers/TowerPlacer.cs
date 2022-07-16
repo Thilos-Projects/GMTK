@@ -53,7 +53,6 @@ public class TowerPlacer : MonoBehaviour
         Destroy(dragObject);
 
         Vector3Int initCell = tm.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-
         Vector2Int mapPos = TileMapBuilder.tileToMap(initCell);
         Vector2Int reverseMapPos = new Vector2Int(mapPos.x, 30-mapPos.y + 38);
         Vector3Int cellPos = TileMapBuilder.mapToTile(mapPos);
@@ -65,10 +64,12 @@ public class TowerPlacer : MonoBehaviour
 
         isInDragMode = false;
 
+        Debug.Log(mapPos);
+
         if (mapPos.x < 1 || mapPos.x > 14 || mapPos.y < 3 || mapPos.y > 30)
             return;
 
-        if (towerMap[mapPos.x, mapPos.y] != null)
+        if (towerMap[mapPos.x, mapPos.y] != null || TileMapBuilder.map[mapPos.x, mapPos.y] > 1)
             return;
 
         towerAction actionScript = Instantiate(standartTowerPrefab).GetComponent<towerAction>();
