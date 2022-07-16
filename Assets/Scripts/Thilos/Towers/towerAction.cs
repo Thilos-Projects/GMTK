@@ -40,6 +40,19 @@ public class towerAction : MonoBehaviour
     //Setup call
     public void Setup()
     {
+        if(onSetup == null)
+            onSetup = new UnityEvent();
+        if (onSetupFinisch == null)
+            onSetupFinisch = new UnityEvent();
+        if (onShoot == null)
+            onShoot = new UnityEvent();
+        if (onShootFinisch == null)
+            onShootFinisch = new UnityEvent();
+        if (onLookOn == null)
+            onLookOn = new UnityEvent();
+        if (onLookOnIsOn == null)
+            onLookOnIsOn = new UnityEvent();
+
         isSetup = false;
         onSetup.Invoke();
         StartCoroutine(setupFinischEnum());

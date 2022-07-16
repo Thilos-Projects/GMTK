@@ -21,7 +21,7 @@ public class TileMapBuilder : MonoBehaviour
     public const int height = 36*2+1;
     public const int startX = 10;
     public const int startY = 25;
-    public int[,] map = new int[width, height];
+    public static int[,] map = new int[width, height];
 
     public void makeMap()
     {
@@ -56,9 +56,18 @@ public class TileMapBuilder : MonoBehaviour
         //tilePos.y = startY - (mapPos.x + mapPos.y/2)
         //tilePos.y - startY + mapPos.x = -mapPos.y/2
         //-(tilePos.y - startY + mapPos.x)*2 = mapPos.y
-        //-(tilePos.y - startY + tilePos.x - startX + mapPos.y - mapPos.y/2)*2 = mapPos.y
-        //-tilePos.y + startY - tilePos.x + startX = mapPos.y
+        //- 2 * tilePos.y + 2 * startY - 2 * mapPos.x = mapPos.y
+        //- 2 * tilePos.y + 2 * startY - 2 * (tilePos.x - startX + mapPos.y/2) = mapPos.y
+        //- 2 * tilePos.y + 2 * startY -2 * tilePos.x + 2 * startX - mapPos.y = mapPos.y
+        //- 2 * tilePos.y + 2 * startY -2 * tilePos.x + 2 * startX = 2 * mapPos.y
+        //- tilePos.y + startY - tilePos.x + startX = mapPos.y
 
-        return new Vector2Int(tilePos.x - startX + (-tilePos.y + startY - tilePos.x + startX) / 2, -tilePos.y + startY - tilePos.x + startX);
+
+        //tilePos.x - startX + mapPos.y/2 = mapPos.x
+        //tilePos.x - startX + (- tilePos.y + startY - tilePos.x + startX)/2 = mapPos.x
+
+        int y = -tilePos.y + startY - tilePos.x + startX;
+
+        return new Vector2Int(tilePos.x - startX + y / 2 + y % 2, y);
     }
 }
