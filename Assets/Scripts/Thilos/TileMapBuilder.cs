@@ -65,7 +65,12 @@ public class TileMapBuilder : MonoBehaviour
         for (int x = 0; x < width; x++)
             for (int y = 0; y < height; y++)
             {
-                tm.SetTile(mapToTile(new Vector2Int(x, y)), bases[map[x, y]]);
+                Vector3Int pos = mapToTile(new Vector2Int(x, y));
+                if (map[x, y] > 4)
+                    pos.z = 2;
+                if (map[x, y] == 4 || map[x,y] == 7)
+                    pos.z = 1;
+                tm.SetTile(pos, bases[map[x, y]]);
             }
     }
 
