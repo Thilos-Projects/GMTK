@@ -720,21 +720,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ff8b2797e9f0a4897324eeb82677dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPoint: {fileID: 1001507204}
-  stopPoint: {fileID: 862236720}
-  holeHead: {fileID: 914653473}
-  holeTail: {fileID: 226501362}
   tm: {fileID: 2123163488}
   bases:
-  - {fileID: 11400000, guid: 674db28a62743fc2fff1758c21ce01fd, type: 2}
-  - {fileID: 11400000, guid: 1e413f202593482e92caea4d8798e1fa, type: 2}
-  - {fileID: 11400000, guid: 2c048a41a41437074b63e4600983963f, type: 2}
-  - {fileID: 11400000, guid: 46ee7724d333d953f2bbe8ad0cef95bc, type: 2}
-  - {fileID: 11400000, guid: c8f96357b97ff3be09bbf6ae22602215, type: 2}
+  - {fileID: 11400000, guid: 1801569f7b692992e9a98e47fcda6337, type: 2}
+  - {fileID: 11400000, guid: d2dbfa2df712f92f49ccc5a0b0eefbe7, type: 2}
+  - {fileID: 11400000, guid: 7aef14966353b16aa979617f46e37285, type: 2}
+  - {fileID: 11400000, guid: dcbd64b026b048b076ff93151f042100, type: 2}
+  - {fileID: 11400000, guid: 8d54ce9747dcaa8ad715a4349717cb0d, type: 2}
+  - {fileID: 11400000, guid: b59935eda64294a6762786b6d8017ea2, type: 2}
   - {fileID: 11400000, guid: a61c30572e5869d770a9d8a92232c325, type: 2}
-  - {fileID: 11400000, guid: a61c30572e5869d770a9d8a92232c325, type: 2}
-  - {fileID: 11400000, guid: 13324df50f4c89ecabbe6a8aec2bd4ba, type: 2}
-  - {fileID: 11400000, guid: a61c30572e5869d770a9d8a92232c325, type: 2}
+  - {fileID: 11400000, guid: f6ed0cce000fbd4323fd203f8dbe342b, type: 2}
+  - {fileID: 11400000, guid: ffa3ba7568455ee28d69f81c9c7cad97, type: 2}
   - {fileID: 11400000, guid: a61c30572e5869d770a9d8a92232c325, type: 2}
   path: {fileID: 11400000, guid: b222d5eec3005414a8bd691e34ccf223, type: 2}
 --- !u!114 &1181023414

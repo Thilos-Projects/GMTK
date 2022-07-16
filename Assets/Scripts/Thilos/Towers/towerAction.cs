@@ -9,7 +9,7 @@ public class towerAction : MonoBehaviour
     public towerScriptableObject prefab;
 
     public int layer;
-    public Vector2 pos;
+    //public Vector2 pos;
     public float viewDirection;
 
     public bool isSetup = false;
@@ -99,18 +99,18 @@ public class towerAction : MonoBehaviour
             return;
         if (target == null)
         {
-            List<ITarget> t = TargetManager.getTargets(pos, layer, prefab.range);
+            List<ITarget> t = TargetManager.getTargets(transform.position, layer, prefab.range);
             if(t.Count == 0)
                 return;
             setTarget(t[0]);
         }
-        else if (Vector2.Distance(target.getPosition(), pos) > prefab.range)
+        else if (Vector2.Distance(target.getPosition(), transform.position) > prefab.range)
         {
             target = null;
         }
         else
         {
-            float requiredAngle = Vector2.SignedAngle(Vector2.up, target.getPosition() - pos) % 360;
+            float requiredAngle = Vector2.SignedAngle(Vector2.up, target.getPosition() - transform.position) % 360;
             //float requiredAngle = Vector2.Angle(Vector2.up, target.getPosition() - pos);
             float correction = requiredAngle - viewDirection;
             if(correction > 180 || correction < 0)

@@ -64,8 +64,6 @@ public class TowerPlacer : MonoBehaviour
 
         isInDragMode = false;
 
-        Debug.Log(mapPos);
-
         if (mapPos.x < 1 || mapPos.x > 14 || mapPos.y < 3 || mapPos.y > 30)
             return;
 
@@ -74,7 +72,7 @@ public class TowerPlacer : MonoBehaviour
 
         towerAction actionScript = Instantiate(standartTowerPrefab).GetComponent<towerAction>();
         towerMap[mapPos.x, mapPos.y] = actionScript;
-        actionScript.pos = position;
+        //actionScript.pos = mapPos;
         actionScript.transform.position = new Vector3(position.x, position.y, 0);
         actionScript.transform.parent = parrent;
         actionScript.layer = 0;
@@ -89,7 +87,7 @@ public class TowerPlacer : MonoBehaviour
         
         actionScript = Instantiate(standartTowerPrefab).GetComponent<towerAction>();
         towerMap[reverseMapPos.x, reverseMapPos.y] = actionScript;
-        actionScript.pos = reversPosition;
+        //actionScript.pos = reverseMapPos;
         actionScript.transform.position = new Vector3(reversPosition.x, reversPosition.y, 0);
         actionScript.transform.parent = parrent;
         actionScript.layer = 1;

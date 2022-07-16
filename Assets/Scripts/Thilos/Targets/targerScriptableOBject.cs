@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="TD/Target")]
 public class targerScriptableOBject : ScriptableObject
 {
-
+    public float speed;
 }

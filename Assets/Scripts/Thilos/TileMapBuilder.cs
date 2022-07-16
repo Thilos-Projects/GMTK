@@ -7,10 +7,7 @@ public class TileMapBuilder : MonoBehaviour
 {
     public enum TileTypes : byte
     {
-        HeadLight = 0,
-        HeadDark = 1,
-        TailLight = 2,
-        TailDark = 3,
+        ground = 0,
         HeadPath = 4,
         HeadHole = 5,
         HeadTarget = 6,
@@ -47,12 +44,12 @@ public class TileMapBuilder : MonoBehaviour
                 if (path.positionenOben.Contains(new Vector2Int(x, y)))
                     map[x, y] = ((int)TileTypes.HeadPath);
                 else
-                    map[x, y] = y % 2  == 0 ? ((int)TileTypes.HeadLight) : ((int)TileTypes.HeadDark);
+                    map[x, y] = ((int)TileTypes.ground);
             for (int y = height / 2; y < height; y++)
                 if (path.positionenUnten.Contains(new Vector2Int(x, y)))
                     map[x, y] = ((int)TileTypes.TailPath);
                 else
-                    map[x, y] = y % 2 == 0 ? ((int)TileTypes.TailLight) : ((int)TileTypes.TailDark);
+                    map[x, y] = ((int)TileTypes.ground);
         }
         map[path.targetPos.x, path.targetPos.y] = ((int)TileTypes.HeadTarget);
         map[path.originePos.x, path.originePos.y] = ((int)TileTypes.TailOrigine);
@@ -66,11 +63,38 @@ public class TileMapBuilder : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 Vector3Int pos = mapToTile(new Vector2Int(x, y));
-                if (map[x, y] > 4)
+                if (y < height / 2)
+                    tm.SetTile(pos, bases[(y % 2)]);
+                else
+                    tm.SetTile(pos, bases[(y % 2 + 2)]);
+
+                if (map[x, y] == ((int)TileTypes.ground))
+                    continue;
+
+                if (map[x, y] == ((int)TileTypes.HeadHole))
+                {
                     pos.z = 2;
-                if (map[x, y] == 4 || map[x,y] == 7)
+                    tm.SetTile(pos, bases[5]);
                     pos.z = 1;
-                tm.SetTile(pos, bases[map[x, y]]);
+                    tm.SetTile(pos, bases[4]);
+                }
+                if (map[x, y] == ((int)TileTypes.TailHole))
+                {
+                    pos.z = 2;
+                    tm.SetTile(pos, bases[8]);
+                    pos.z = 1;
+                    tm.SetTile(pos, bases[7]);
+                }
+                if (map[x, y] == ((int)TileTypes.HeadPath))
+                {
+                    pos.z = 1;
+                    tm.SetTile(pos, bases[4]);
+                }
+                if (map[x, y] == ((int)TileTypes.TailPath))
+                {
+                    pos.z = 1;
+                    tm.SetTile(pos, bases[7]);
+                }
             }
     }
 

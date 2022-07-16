@@ -5,9 +5,19 @@ using UnityEngine;
 [RequireComponent(typeof(TileMapBuilder))]
 public class targetPathGenerator : MonoBehaviour
 {
+    public static targetPathGenerator instance;
+    public static targetPathGenerator getInstance()
+    {
+        return instance;
+    }
+    private void Awake()
+    {
+        instance = this;
+    }
+
     public Transform parrent;
 
-    TileMapBuilder tmb;
+    public TileMapBuilder tmb;
 
     void Start()
     {
@@ -36,7 +46,6 @@ public class targetPathGenerator : MonoBehaviour
                 directionMapTails.Add(currentPos, nextPosition);
             currentPos = nextPosition;
             openPositions.Remove(currentPos);
-            Debug.Log(dist);
         }
 
         openPositions = new List<Vector2Int>(tmb.path.positionenOben);
@@ -52,11 +61,10 @@ public class targetPathGenerator : MonoBehaviour
                     dist = Vector2Int.Distance(currentPos, openPositions[i]);
                     nextPosition = openPositions[i];
                 }
-            if (!directionMapHead.ContainsKey(currentPos))
+            if (!directionMapHead.ContainsKey(currentPos) && dist != 0)
                 directionMapHead.Add(currentPos, nextPosition);
             currentPos = nextPosition;
             openPositions.Remove(currentPos);
-            Debug.Log(dist);
         }
     }
 
@@ -66,7 +74,7 @@ public class targetPathGenerator : MonoBehaviour
     public Vector2Int upperStart;
     public Vector2Int lowerStart;
 
-    bool hasNext(Vector2Int lastTarget, int layer)
+    public bool hasNext(Vector2Int lastTarget, int layer)
     {
         if (layer == 0)
             return directionMapHead.ContainsKey(lastTarget);
@@ -74,7 +82,7 @@ public class targetPathGenerator : MonoBehaviour
             return directionMapTails.ContainsKey(lastTarget);
     }
 
-    Vector2Int getNextTarget(Vector2Int lastTarget, int layer)
+    public Vector2Int getNextTarget(Vector2Int lastTarget, int layer)
     {
         if (layer == 0)
         {

@@ -6,7 +6,7 @@ public class TargetManager
 {
     public static List<ITarget> targetsUpper = new List<ITarget>();
     public static List<ITarget> targetsLower = new List<ITarget>();
-    public static List<ITarget> getTargets(Vector2 pos, int layer, float range)
+    public static List<ITarget> getTargets(Vector3 pos, int layer, float range)
     {
         List<ITarget> targets = new List<ITarget>();
 
@@ -14,8 +14,9 @@ public class TargetManager
         {
             for(int i = 0; i < targetsUpper.Count; i++)
             {
-                Vector2 tPos = targetsUpper[i].getPosition();
-                if (Vector2.Distance(tPos, pos) < range)
+                Vector3 tPos = targetsUpper[i].getPosition();
+                tPos.z = 0;
+                if (Vector3.Distance(pos, tPos) < range)
                     targets.Add(targetsUpper[i]);
             }
         }
@@ -23,8 +24,9 @@ public class TargetManager
         {
             for (int i = 0; i < targetsLower.Count; i++)
             {
-                Vector2 tPos = targetsLower[i].getPosition();
-                if (Vector2.Distance(tPos, pos) < range)
+                Vector3 tPos = targetsLower[i].getPosition();
+                tPos.z = 0;
+                if (Vector3.Distance(pos, tPos) < range)
                     targets.Add(targetsLower[i]);
             }
         }

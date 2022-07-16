@@ -4,5 +4,6 @@ using UnityEngine;
 
 public interface ITarget
 {
-    public Vector2 getPosition();
+    public Vector3 getPosition();
+    public int getLayer();
 }
