@@ -723,11 +723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3677db97f7e02664ab027a98192b73bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
   startScene: 1
-=======
-  startScene: 0
->>>>>>> Menu
 --- !u!1 &586594683
 GameObject:
   m_ObjectHideFlags: 0
