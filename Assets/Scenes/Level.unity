@@ -1225,8 +1225,8 @@ Tilemap:
       e13: 5.63e-43
       e20: -1.2741013e-27
       e21: 1e-45
-      e22: -6.5838734e-29
-      e23: -4.709362e-10
+      e22: -6.657097e-29
+      e23: -4.685905e-10
       e30: 4.5905e-41
       e31: 0
       e32: 5.63e-43
@@ -1237,7 +1237,7 @@ Tilemap:
   - m_RefCount: 0
     m_Data: {r: NaN, g: NaN, b: NaN, a: NaN}
   - m_RefCount: 0
-    m_Data: {r: 4.0823e-41, g: 4.0823e-41, b: 4.0823e-41, a: 4.0823e-41}
+    m_Data: {r: 5.3695e-41, g: 5.3695e-41, b: 5.3695e-41, a: 5.3695e-41}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
