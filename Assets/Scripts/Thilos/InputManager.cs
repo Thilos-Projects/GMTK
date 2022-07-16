@@ -26,6 +26,17 @@ public class InputManager : MonoBehaviour
     }
     public List<KeyEvent> keyEvents;
 
+    [System.Serializable]
+    public struct ButtonEvent
+    {
+        public string name;
+        public UnityEvent eu;
+        public UnityEvent ed;
+        public UnityEvent e;
+        public int key;
+    }
+    public List<ButtonEvent> buttonEvents;
+
     void Update()
     {
         for(int i = 0; i < keyEvents.Count; i++)
@@ -38,6 +49,16 @@ public class InputManager : MonoBehaviour
             if (Input.GetKeyDown(e.key))
                 e.ed.Invoke();
         }
+        for(int i = 0; i < buttonEvents.Count; i++)
+        {
+            ButtonEvent e = buttonEvents[i];
+            if (Input.GetMouseButton(e.key))
+                e.e.Invoke();
+            if (Input.GetMouseButtonDown(e.key))
+                e.ed.Invoke();
+            if (Input.GetMouseButtonUp(e.key))
+                e.eu.Invoke();
+        }
     }
 
     public void requestInput(string name, UnityAction action, bool onDown, bool onUp, bool perFrame)
@@ -45,6 +66,19 @@ public class InputManager : MonoBehaviour
         for (int i = 0; i < keyEvents.Count; i++)
         {
             KeyEvent e = keyEvents[i];
+            if (e.name == name)
+            {
+                if (onDown)
+                    e.ed.AddListener(action);
+                if (onUp)
+                    e.eu.AddListener(action);
+                if (perFrame)
+                    e.e.AddListener(action);
+            }
+        }
+        for (int i = 0; i < buttonEvents.Count; i++)
+        {
+            ButtonEvent e = buttonEvents[i];
             if (e.name == name)
             {
                 if (onDown)

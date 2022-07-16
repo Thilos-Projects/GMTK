@@ -9,7 +9,7 @@ public class towerAction : MonoBehaviour
     public towerScriptableObject prefab;
 
     public int layer;
-    public Vector2Int pos;
+    public Vector2 pos;
     public float viewDirection;
 
     public bool isSetup = false;
@@ -54,6 +54,9 @@ public class towerAction : MonoBehaviour
         yield return new WaitForSeconds(prefab.setupTime);
         SetupFinisch();
     }
+
+    public SpriteRenderer bodySprite;
+    public SpriteRenderer turretSprite;
 
     public void Shoot()
     {

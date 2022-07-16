@@ -6,7 +6,7 @@ public class TargetManager
 {
     public static List<ITarget> targetsUpper = new List<ITarget>();
     public static List<ITarget> targetsLower = new List<ITarget>();
-    public static List<ITarget> getTargets(Vector2Int pos, int layer, float range)
+    public static List<ITarget> getTargets(Vector2 pos, int layer, float range)
     {
         List<ITarget> targets = new List<ITarget>();
 
