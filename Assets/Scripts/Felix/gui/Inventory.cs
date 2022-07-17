@@ -23,6 +23,8 @@ namespace gui
         public TowerPlacer tp;
         private GameObject dieToDeactivate;
 
+        public Button nextWave;
+
         private void Awake()
         {
             dice = new [] {0, 0};
@@ -66,6 +68,7 @@ namespace gui
             BButton.enabled = true;
             AD.enabled = true;
             BD.enabled = true;
+            nextWave.enabled = true;
         }
 
         public void onEnemyChange(int count)

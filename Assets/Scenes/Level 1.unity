@@ -1928,6 +1928,7 @@ MonoBehaviour:
   - {fileID: -461633011, guid: a9bf36e86bc60314d90584af8312ff78, type: 3}
   - {fileID: 1505163385, guid: a9bf36e86bc60314d90584af8312ff78, type: 3}
   tp: {fileID: 1818724596}
+  nextWave: {fileID: 1607860148}
 --- !u!114 &2079342472
 MonoBehaviour:
   m_ObjectHideFlags: 0
