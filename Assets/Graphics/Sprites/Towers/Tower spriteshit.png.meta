@@ -3627,7 +3627,7 @@ TextureImporter:
       Tower spriteshit_141: 1982388668
       Tower spriteshit_150: -1922200181
       Tower spriteshit_105: -1839300779
-      Tower spriteshit_162: 567005581
+      Tower spriteshit_99: -292348283
       Tower spriteshit_123: 526319902
       Tower spriteshit_1: -1913357694
       Tower spriteshit_147: 1687199160
@@ -3744,8 +3744,8 @@ TextureImporter:
       Tower spriteshit_145: 1219966380
       Tower spriteshit_125: 36150913
       Tower spriteshit_127: -742421357
-      Tower spriteshit_99: -292348283
       Tower spriteshit_148: 681270751
+      Tower spriteshit_162: 567005581
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

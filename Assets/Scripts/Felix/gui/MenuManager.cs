@@ -9,10 +9,12 @@ public class MenuManager : MonoBehaviour
 
     public void LoadNextScene()
     {
+        Debug.Log("Load");
         SceneManager.LoadScene(DDestroyOnLoad.getInstance().NextLevelName);
     }
     public void LoadPriviousScene()
     {
+        Debug.Log("Load");
         SceneManager.LoadScene(DDestroyOnLoad.getInstance().ThisLevelName);
     }
 
