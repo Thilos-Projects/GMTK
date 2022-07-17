@@ -1619,6 +1619,7 @@ GameObject:
   - component: {fileID: 1818724596}
   - component: {fileID: 1818724595}
   - component: {fileID: 1818724594}
+  - component: {fileID: 1818724600}
   m_Layer: 0
   m_Name: Gamemanager
   m_TagString: Untagged
@@ -1683,7 +1684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tm: {fileID: 2123163488}
-  towerPrefab: {fileID: 11400000, guid: 27bc98c49b60e7e49aaa8315b66a7ec5, type: 2}
+  towerPrefab: {fileID: 0}
   standartTowerPrefab: {fileID: 5218144243580710214, guid: 59cc36d5e5da3bb4591b8acc18cfeeb9, type: 3}
   dragPrefab: {fileID: 3998253884315700297, guid: 664e87a8267a0c242865b962bd910d8a, type: 3}
   onPlace:
@@ -1801,6 +1802,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1818724600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818724593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 353ca3ce0d6b63742a7d8e77db8223e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisLevelName: Level
+  nextLevelName: Level 1
 --- !u!1 &2079342469
 GameObject:
   m_ObjectHideFlags: 0
