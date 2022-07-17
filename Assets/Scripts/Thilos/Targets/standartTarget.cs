@@ -22,6 +22,8 @@ public class standartTarget : MonoBehaviour , ITarget
 
     public float speedMult = 1;
 
+    public Transform LebensLeiste;
+
     targetPathGenerator tpg;
 
     public int getLayer()
@@ -83,6 +85,8 @@ public class standartTarget : MonoBehaviour , ITarget
 
     private void Update()
     {
+        LebensLeiste.localScale = new Vector3(LebensLeiste.localScale.z * (leben / prefab.leben), LebensLeiste.localScale.y, LebensLeiste.localScale.z);
+
         if (freez > 0)
         {
             freez -= Time.deltaTime;
@@ -136,6 +140,7 @@ public class standartTarget : MonoBehaviour , ITarget
         }
         else
         {
+            Debug.Log("Reached end");
         }
     }
 }
