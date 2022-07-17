@@ -77,8 +77,7 @@ public class TowerPlacer : MonoBehaviour
         actionScript.transform.parent = parrent;
         actionScript.layer = 0;
         actionScript.viewDirection = 0;
-        actionScript.bodySprite.sprite = towerPrefab.body;
-        actionScript.turretSprite.sprite = towerPrefab.turret;
+        actionScript.body.runtimeAnimatorController = towerPrefab.prefab;
         actionScript.prefab = towerPrefab;
         actionScript.Setup();
 
@@ -94,8 +93,7 @@ public class TowerPlacer : MonoBehaviour
         actionScript.layer = 1;
         actionScript.viewDirection = 0;
         actionScript.prefab = towerPrefab;
-        actionScript.bodySprite.sprite = towerPrefab.body;
-        actionScript.turretSprite.sprite = towerPrefab.turret;
+        actionScript.body.runtimeAnimatorController = towerPrefab.reverseTower.prefab;
         actionScript.prefab = towerPrefab.reverseTower;
         actionScript.Setup();
     }

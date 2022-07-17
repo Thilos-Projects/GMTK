@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 257bc5e711c65da49b83839f79691e52, type: 3}
-  m_Name: TowerUnten
+  m_Name: Head5
   m_EditorClassIdentifier: 
   isWayTower: 0
   range: 3
-  setupTime: 5
+  setupTime: 1
   cooldown: 2
   turningSpeed: 200
-  body: {fileID: 21300000, guid: 2bae88d4fa9be914ea1c8d4d7b3dab8d, type: 3}
-  turret: {fileID: 21300000, guid: bc2bfdb140c81dd4fb902b1274728d68, type: 3}
+  prefab: {fileID: 9100000, guid: 5e143b8e481e0174689106292a7192db, type: 2}
   bullet: {fileID: 11400000, guid: 341e5726bd448ad4ebbb5f78afcbfdd0, type: 2}
   onPathAlternative: {fileID: 0}
-  reverseTower: {fileID: 0}
+  reverseTower: {fileID: 11400000, guid: 65a45a0efdb041c49a6cc28ec40c09e8, type: 2}

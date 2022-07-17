@@ -68,8 +68,7 @@ public class towerAction : MonoBehaviour
         SetupFinisch();
     }
 
-    public SpriteRenderer bodySprite;
-    public SpriteRenderer turretSprite;
+    public Animator body;
 
     public void Shoot()
     {
@@ -136,6 +135,7 @@ public class towerAction : MonoBehaviour
                         onLookOnIsOn.Invoke();
                     }
                 }
+                body.SetFloat("Direction", viewDirection);
             }
         }catch(MissingReferenceException e)
         {

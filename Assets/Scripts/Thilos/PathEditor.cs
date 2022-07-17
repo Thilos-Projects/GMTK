@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(TileMapBuilder))]
@@ -23,6 +24,11 @@ public class PathEditor : MonoBehaviour
         InputManager.get().requestInput("ClearPath", clearPath, true, false, false);
         InputManager.get().requestInput("PlaceElement", OnClickPath, false, false, true);
         InputManager.get().requestInput("PlaceElement", onClick, true, false, false);
+    }
+
+    private void OnDestroy()
+    {
+        EditorUtility.SetDirty(tm.path);
     }
 
     void onClick()

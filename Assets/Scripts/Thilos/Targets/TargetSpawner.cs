@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(targetPathGenerator), typeof(TileMapBuilder))]
 public class TargetSpawner : MonoBehaviour
@@ -8,6 +9,7 @@ public class TargetSpawner : MonoBehaviour
     [System.Serializable]
     public struct SpawnEntry
     {
+        public bool isEndOfWave;
         public float delay;
         public targerScriptableOBject[] toSpawn;
     }
@@ -25,10 +27,12 @@ public class TargetSpawner : MonoBehaviour
         tmb = GetComponent<TileMapBuilder>();
         path = GetComponent<targetPathGenerator>();
 
+    }
+
+    public void startSpawn()
+    {
         if (toSpawn.Count > 0)
             StartCoroutine(spawnDelay());
-        else
-            Done();
     }
 
     void Spawn(targerScriptableOBject toSpawn)
@@ -54,14 +58,7 @@ public class TargetSpawner : MonoBehaviour
         {
             Spawn(entry.toSpawn[i]);
         }
-        if (toSpawn.Count > 0)
+        if (toSpawn.Count > 0 && !entry.isEndOfWave)
             StartCoroutine(spawnDelay());
-        else
-            Done();
-    }
-
-    void Done()
-    {
-        Debug.Log("done");
     }
 }

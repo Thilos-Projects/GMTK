@@ -779,7 +779,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f6ed0cce000fbd4323fd203f8dbe342b, type: 2}
   - {fileID: 11400000, guid: ffa3ba7568455ee28d69f81c9c7cad97, type: 2}
   - {fileID: 11400000, guid: a61c30572e5869d770a9d8a92232c325, type: 2}
-  path: {fileID: 11400000, guid: b222d5eec3005414a8bd691e34ccf223, type: 2}
+  path: {fileID: 11400000, guid: 7a7060d77a3ce984fa8a92c4e79a739f, type: 2}
 --- !u!114 &1181023414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -900,14 +900,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toSpawn:
-  - delay: 0
+  - isEndOfWave: 0
+    delay: 0
     toSpawn:
     - {fileID: 11400000, guid: ff54f82e7e5a1094fb36cb5b2ca7cd8a, type: 2}
-  - delay: 5
+  - isEndOfWave: 0
+    delay: 5
     toSpawn:
     - {fileID: 11400000, guid: ff54f82e7e5a1094fb36cb5b2ca7cd8a, type: 2}
     - {fileID: 11400000, guid: ff54f82e7e5a1094fb36cb5b2ca7cd8a, type: 2}
-  - delay: 1
+  - isEndOfWave: 0
+    delay: 1
     toSpawn:
     - {fileID: 11400000, guid: ff54f82e7e5a1094fb36cb5b2ca7cd8a, type: 2}
   targetPrefab: {fileID: 6071310809825295940, guid: 4d696b3b1645c7948bbd7d56f4e647b4, type: 3}
