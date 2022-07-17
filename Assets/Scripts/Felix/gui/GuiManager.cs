@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using Mono.Cecil;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Serialization;
 
 namespace gui
 {
     public class GuiManager : MonoBehaviour
     {
         [SerializeField] private float flipSpeed = 1;
+        [FormerlySerializedAs("Inventory")] public GameObject inventory;
+        public GameObject rerollButton;
+        public bool DisableFlip { get; set; }
 
         private Coroutine flip;
         private bool stageIsFlipped = false;
@@ -24,9 +28,12 @@ namespace gui
 
         public void FlipStage()
         {
+            if (DisableFlip) return;
             if(flip != null) StopCoroutine(flip);
 
             stageIsFlipped = !stageIsFlipped;
+            inventory.SetActive(!stageIsFlipped);
+            rerollButton.SetActive(!stageIsFlipped);
 
             flip = StartCoroutine(FlipEnumerator(stageIsFlipped));
         }
