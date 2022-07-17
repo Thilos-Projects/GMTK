@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 257bc5e711c65da49b83839f79691e52, type: 3}
   m_Name: Tail4
   m_EditorClassIdentifier: 
+  targetCount: 0
+  isBuf: 1
   isWayTower: 0
-  range: 3
+  range: 2
   setupTime: 1
-  cooldown: 2
-  turningSpeed: 200
+  cooldown: 1000
+  turningSpeed: 2000
   prefab: {fileID: 9100000, guid: 6f1904ad6691bdb4798df0ec6357bcb0, type: 2}
-  bullet: {fileID: 11400000, guid: 341e5726bd448ad4ebbb5f78afcbfdd0, type: 2}
+  bullet: {fileID: 11400000, guid: 8771ca2fe7eaa5448addfbb4cd3bf347, type: 2}
+  bulletUpgraded: {fileID: 11400000, guid: 4e6c8d32d7cd7f6428225a76c8ff1320, type: 2}
   onPathAlternative: {fileID: 0}
-  reverseTower: {fileID: 11400000, guid: 27bc98c49b60e7e49aaa8315b66a7ec5, type: 2}
+  reverseTower: {fileID: 11400000, guid: 4e81c8bc3ca663d428cbd0383e6ff776, type: 2}

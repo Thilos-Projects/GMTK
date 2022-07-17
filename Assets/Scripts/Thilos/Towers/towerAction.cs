@@ -13,54 +13,25 @@ public class towerAction : MonoBehaviour
     public float viewDirection;
 
     public bool isSetup = false;
-    //wird beim platzieren des turms aufgerufen
-    public UnityEvent onSetup;
-    //wird auffgerufen, sobald die setup time nach dem setup aufruf vorbei ist
-    public UnityEvent onSetupFinisch;
 
     public bool isShooting;
-    //wir mit dem schieﬂ befehl aufgeruen
-    public UnityEvent onShoot;
-    //wird aufgerufen, sobald der schieﬂcooldown abgelaufen ist
-    public UnityEvent onShootFinisch;
-
-    //wir aufgerufen sobald ein neues ziel eingetragen ist
-    public UnityEvent onLookOn;
-    //wird jeden frame aufgerufen, der das target anvisiert
-    public UnityEvent onLookOnIsOn;
     
     //read only
     public ITarget target;
     public void setTarget(ITarget target)
     {
         this.target = target;
-        onLookOn.Invoke();
     }
 
     //Setup call
     public void Setup()
     {
-        if(onSetup == null)
-            onSetup = new UnityEvent();
-        if (onSetupFinisch == null)
-            onSetupFinisch = new UnityEvent();
-        if (onShoot == null)
-            onShoot = new UnityEvent();
-        if (onShootFinisch == null)
-            onShootFinisch = new UnityEvent();
-        if (onLookOn == null)
-            onLookOn = new UnityEvent();
-        if (onLookOnIsOn == null)
-            onLookOnIsOn = new UnityEvent();
-
         isSetup = false;
-        onSetup.Invoke();
         StartCoroutine(setupFinischEnum());
     }
     private void SetupFinisch()
     {
         isSetup = true;
-        onSetupFinisch.Invoke();
     }
     IEnumerator setupFinischEnum()
     {
@@ -69,6 +40,10 @@ public class towerAction : MonoBehaviour
     }
 
     public Animator body;
+    public bool Upgraded;
+    public bool isBuffed;
+
+    public UnityEvent onShoot;
 
     public void Shoot()
     {
@@ -77,14 +52,19 @@ public class towerAction : MonoBehaviour
         if(isShooting)
             return;
         isShooting = true;
-        BulletAction.Setup(target, transform, prefab.bullet);
-        onShoot.Invoke();
+
+        if (onShoot != null)
+            onShoot.Invoke();
+
+        if(Upgraded)
+            BulletAction.Setup(target, transform, prefab.bulletUpgraded);
+        else
+            BulletAction.Setup(target, transform, prefab.bullet);
         StartCoroutine(ShotFinischEnum());
     }
     private void shotFinisched()
     {
         isShooting = false;
-        onShootFinisch.Invoke();
     }
     IEnumerator ShotFinischEnum()
     {
@@ -98,14 +78,48 @@ public class towerAction : MonoBehaviour
             return;
         try
         {
+            if (prefab.isBuf)
+            {
+                for (int x = 0; x < TileMapBuilder.width; x++)
+                    for (int y = 0; y < TileMapBuilder.height; y++)
+                    {
+                        towerAction ta = TowerPlacer.towerMap[x, y];
+                        if (ta != null && ta != this)
+                            if (Vector3.Distance(ta.transform.position, transform.position) < prefab.range * (Upgraded ? 2 : 1))
+                                ta.isBuffed = true;
+                    }
+                return;
+            }
+
+            if(prefab.targetCount > 0)
+            {
+                if (isShooting)
+                    return;
+
+                List<ITarget> t = TargetManager.getTargets(transform.position, layer, prefab.range * (isBuffed ? 2 : 1));
+                if (t.Count == 0)
+                    return;
+
+                isShooting = true;
+                if (Upgraded)
+                    for(int i = 0; i < t.Count && i < prefab.targetCount; i++)
+                        BulletAction.Setup(t[i], transform, prefab.bulletUpgraded);
+                else
+                    for (int i = 0; i < t.Count && i < prefab.targetCount; i++)
+                        BulletAction.Setup(t[i], transform, prefab.bullet);
+
+                StartCoroutine(ShotFinischEnum());
+                return;
+            }
+
             if (target == null)
             {
-                List<ITarget> t = TargetManager.getTargets(transform.position, layer, prefab.range);
+                List<ITarget> t = TargetManager.getTargets(transform.position, layer, prefab.range * (isBuffed ? 2 : 1));
                 if (t.Count == 0)
                     return;
                 setTarget(t[0]);
             }
-            else if (Vector2.Distance(target.getPosition(), transform.position) > prefab.range)
+            else if (Vector2.Distance(target.getPosition(), transform.position) > prefab.range * (isBuffed ? 2 : 1))
             {
                 target = null;
             }
@@ -122,7 +136,7 @@ public class towerAction : MonoBehaviour
                     else
                     {
                         viewDirection = requiredAngle;
-                        onLookOnIsOn.Invoke();
+                        Shoot();
                     }
                 }
                 else
@@ -132,7 +146,7 @@ public class towerAction : MonoBehaviour
                     else
                     {
                         viewDirection = requiredAngle;
-                        onLookOnIsOn.Invoke();
+                        Shoot();
                     }
                 }
                 body.SetFloat("Direction", viewDirection);

@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 257bc5e711c65da49b83839f79691e52, type: 3}
-  m_Name: Head3
+  m_Name: SingleTarget
   m_EditorClassIdentifier: 
+  targetCount: 0
+  isBuf: 0
   isWayTower: 0
-  range: 3
+  range: 6
   setupTime: 1
-  cooldown: 2
+  cooldown: 5
   turningSpeed: 200
-  prefab: {fileID: 9100000, guid: 3c5edd714c5389a46ae50e4820327f6d, type: 2}
-  bullet: {fileID: 11400000, guid: 341e5726bd448ad4ebbb5f78afcbfdd0, type: 2}
+  prefab: {fileID: 9100000, guid: 5e143b8e481e0174689106292a7192db, type: 2}
+  bullet: {fileID: 11400000, guid: 714fcfc0718881a4fbeff52d83f76663, type: 2}
+  bulletUpgraded: {fileID: 11400000, guid: 38851f254cce10048b812f3e46f633a5, type: 2}
   onPathAlternative: {fileID: 0}
-  reverseTower: {fileID: 11400000, guid: bb44c4b79fc1d794d87a423e7d7935cd, type: 2}
+  reverseTower: {fileID: 11400000, guid: 65a45a0efdb041c49a6cc28ec40c09e8, type: 2}

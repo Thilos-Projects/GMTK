@@ -14,7 +14,7 @@ public class TowerPlacer : MonoBehaviour
     GameObject dragObject;
     Transform dragger;
 
-    towerAction[,] towerMap = new towerAction[TileMapBuilder.width, TileMapBuilder.height];
+    public static towerAction[,] towerMap = new towerAction[TileMapBuilder.width, TileMapBuilder.height];
 
     public Transform parrent;
 
@@ -67,35 +67,48 @@ public class TowerPlacer : MonoBehaviour
         if (mapPos.x < 1 || mapPos.x > 14 || mapPos.y < 3 || mapPos.y > 30)
             return;
 
-        if (towerMap[mapPos.x, mapPos.y] != null || TileMapBuilder.map[mapPos.x, mapPos.y] > 1)
+        if (TileMapBuilder.map[mapPos.x, mapPos.y] > 1)
             return;
 
-        towerAction actionScript = Instantiate(standartTowerPrefab).GetComponent<towerAction>();
-        towerMap[mapPos.x, mapPos.y] = actionScript;
-        //actionScript.pos = mapPos;
-        actionScript.transform.position = new Vector3(position.x, position.y, 0);
-        actionScript.transform.parent = parrent;
-        actionScript.layer = 0;
-        actionScript.viewDirection = 0;
-        actionScript.body.runtimeAnimatorController = towerPrefab.prefab;
-        actionScript.prefab = towerPrefab;
-        actionScript.Setup();
+        if (towerMap[mapPos.x, mapPos.y] != null && towerMap[mapPos.x, mapPos.y].prefab == towerPrefab && !towerMap[mapPos.x, mapPos.y].Upgraded)
+        {
+            towerMap[mapPos.x, mapPos.y].Upgraded = true;
+            towerMap[mapPos.x, mapPos.y].body.SetBool("Upgrade", true);
+            if (towerMap[reverseMapPos.x, reverseMapPos.y] != null)
+            {
+                towerMap[reverseMapPos.x, reverseMapPos.y].Upgraded = true;
+                towerMap[reverseMapPos.x, reverseMapPos.y].body.SetBool("Upgrade", true);
+            }
+        }
+        else if(towerMap[mapPos.x, mapPos.y] == null)
+        {
+            towerAction actionScript = Instantiate(standartTowerPrefab).GetComponent<towerAction>();
+            towerMap[mapPos.x, mapPos.y] = actionScript;
+            actionScript.transform.parent = parrent;
+            actionScript.transform.position = new Vector3(position.x, position.y, 0);
+            actionScript.transform.localPosition = new Vector3(actionScript.transform.localPosition.x, actionScript.transform.localPosition.y, -500 + Mathf.Abs(actionScript.transform.localPosition.y));
+            actionScript.layer = 0;
+            actionScript.viewDirection = 0;
+            actionScript.body.runtimeAnimatorController = towerPrefab.prefab;
+            actionScript.prefab = towerPrefab;
+            actionScript.Setup();
 
 
-        if (TileMapBuilder.map[reverseMapPos.x, reverseMapPos.y] > 1)
-            return;
+            if (TileMapBuilder.map[reverseMapPos.x, reverseMapPos.y] > 1)
+                return;
 
-        actionScript = Instantiate(standartTowerPrefab).GetComponent<towerAction>();
-        towerMap[reverseMapPos.x, reverseMapPos.y] = actionScript;
-        //actionScript.pos = reverseMapPos;
-        actionScript.transform.position = new Vector3(reversPosition.x, reversPosition.y, 0);
-        actionScript.transform.parent = parrent;
-        actionScript.layer = 1;
-        actionScript.viewDirection = 0;
-        actionScript.prefab = towerPrefab;
-        actionScript.body.runtimeAnimatorController = towerPrefab.reverseTower.prefab;
-        actionScript.prefab = towerPrefab.reverseTower;
-        actionScript.Setup();
+            actionScript = Instantiate(standartTowerPrefab).GetComponent<towerAction>();
+            towerMap[reverseMapPos.x, reverseMapPos.y] = actionScript;
+            actionScript.transform.parent = parrent;
+            actionScript.transform.position = new Vector3(reversPosition.x, reversPosition.y, 0);
+            actionScript.transform.localPosition = new Vector3(actionScript.transform.localPosition.x, actionScript.transform.localPosition.y, -500 + Mathf.Abs(actionScript.transform.localPosition.y));
+            actionScript.layer = 1;
+            actionScript.viewDirection = 0;
+            actionScript.prefab = towerPrefab;
+            actionScript.body.runtimeAnimatorController = towerPrefab.reverseTower.prefab;
+            actionScript.prefab = towerPrefab.reverseTower;
+            actionScript.Setup();
+        }
     }
 
 }
