@@ -16,9 +16,15 @@ public class SceenManager : MonoBehaviour
         instance = this;
     }
 
+    public string thisLevelName;
+    public string nextLevelName;
+
     void Start()
     {
-        if(TargetManager.onChangeEnemyCount == null)
+        DDestroyOnLoad.getInstance().StartPlaying(DDestroyOnLoad.variants.level);
+        DDestroyOnLoad.getInstance().ThisLevelName = thisLevelName;
+        DDestroyOnLoad.getInstance().NextLevelName = nextLevelName;
+        if (TargetManager.onChangeEnemyCount == null)
         {
             TargetManager.onChangeEnemyCount = new UnityEngine.Events.UnityEvent<int>();
         }
@@ -42,11 +48,13 @@ public class SceenManager : MonoBehaviour
     
     public void Win()
     {
+        DDestroyOnLoad.getInstance().StartPlaying(DDestroyOnLoad.variants.win);
         UnityEngine.SceneManagement.SceneManager.LoadScene("Win");
     }
 
     public void onEnemyToBase()
     {
+        DDestroyOnLoad.getInstance().StartPlaying(DDestroyOnLoad.variants.lose);
         UnityEngine.SceneManagement.SceneManager.LoadScene("Death");
     }
 
