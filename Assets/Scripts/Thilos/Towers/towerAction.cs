@@ -152,7 +152,7 @@ public class towerAction : MonoBehaviour
                         Shoot();
                     }
                 }
-                body.SetFloat("Direction", viewDirection);
+                body.SetFloat("Direction", 360 -  viewDirection);
             }
         }catch(MissingReferenceException e)
         {
