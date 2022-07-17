@@ -9,51 +9,41 @@ public class towerAction : MonoBehaviour
     public towerScriptableObject prefab;
 
     public int layer;
-    public Vector2Int pos;
+    //public Vector2 pos;
     public float viewDirection;
 
     public bool isSetup = false;
-    //wird beim platzieren des turms aufgerufen
-    public UnityEvent onSetup;
-    //wird auffgerufen, sobald die setup time nach dem setup aufruf vorbei ist
-    public UnityEvent onSetupFinisch;
 
     public bool isShooting;
-    //wir mit dem schieﬂ befehl aufgeruen
-    public UnityEvent onShoot;
-    //wird aufgerufen, sobald der schieﬂcooldown abgelaufen ist
-    public UnityEvent onShootFinisch;
-
-    //wir aufgerufen sobald ein neues ziel eingetragen ist
-    public UnityEvent onLookOn;
-    //wird jeden frame aufgerufen, der das target anvisiert
-    public UnityEvent onLookOnIsOn;
     
     //read only
     public ITarget target;
     public void setTarget(ITarget target)
     {
         this.target = target;
-        onLookOn.Invoke();
     }
 
     //Setup call
     public void Setup()
     {
         isSetup = false;
-        onSetup.Invoke();
         StartCoroutine(setupFinischEnum());
     }
     private void SetupFinisch()
     {
         isSetup = true;
-        onSetupFinisch.Invoke();
     }
     IEnumerator setupFinischEnum()
     {
         yield return new WaitForSeconds(prefab.setupTime);
         SetupFinisch();
     }
+
+    public Animator body;
+    public bool Upgraded;
+    public bool isBuffed;
+
+    public UnityEvent onShoot;
 
     public void Shoot()
     {
@@ -62,14 +52,19 @@ public class towerAction : MonoBehaviour
         if(isShooting)
             return;
         isShooting = true;
-        Debug.Log("Shoot");
-        onShoot.Invoke();
+
+        if (onShoot != null)
+            onShoot.Invoke();
+
+        if(Upgraded)
+            BulletAction.Setup(target, transform, prefab.bulletUpgraded);
+        else
+            BulletAction.Setup(target, transform, prefab.bullet);
         StartCoroutine(ShotFinischEnum());
     }
     private void shotFinisched()
     {
         isShooting = false;
-        onShootFinisch.Invoke();
     }
     IEnumerator ShotFinischEnum()
     {
@@ -81,43 +76,84 @@ public class towerAction : MonoBehaviour
     {
         if (!isSetup)
             return;
-        if (target == null)
+        try
         {
-            List<ITarget> t = TargetManager.getTargets(pos, layer, prefab.range);
-            if(t.Count == 0)
-                return;
-            setTarget(t[0]);
-        }
-        else if (Vector2.Distance(target.getPosition(), pos) > prefab.range)
-        {
-            target = null;
-        }
-        else
-        {
-            float requiredAngle = Vector2.SignedAngle(Vector2.up, target.getPosition() - pos) % 360;
-            //float requiredAngle = Vector2.Angle(Vector2.up, target.getPosition() - pos);
-            float correction = requiredAngle - viewDirection;
-            if(correction > 180 || correction < 0)
+            if (prefab.isBuf)
             {
-                correction = 360 - correction;
-                if (correction > prefab.turningSpeed * Time.deltaTime)
-                    viewDirection = (viewDirection - prefab.turningSpeed * Time.deltaTime) % 360;
+                for (int x = 0; x < TileMapBuilder.width; x++)
+                    for (int y = 0; y < TileMapBuilder.height; y++)
+                    {
+                        towerAction ta = TowerPlacer.towerMap[x, y];
+                        if (ta != null && ta != this)
+                            if (Vector3.Distance(ta.transform.position, transform.position) < prefab.range * (Upgraded ? 2 : 1))
+                                ta.isBuffed = true;
+                    }
+                return;
+            }
+
+            if(prefab.targetCount > 0)
+            {
+                if (isShooting)
+                    return;
+
+                List<ITarget> t = TargetManager.getTargets(transform.position, layer, prefab.range * (isBuffed ? 2 : 1));
+                if (t.Count == 0)
+                    return;
+
+                isShooting = true;
+                if (Upgraded)
+                    for(int i = 0; i < t.Count && i < prefab.targetCount; i++)
+                        BulletAction.Setup(t[i], transform, prefab.bulletUpgraded);
                 else
-                {
-                    viewDirection = requiredAngle;
-                    onLookOnIsOn.Invoke();
-                }
+                    for (int i = 0; i < t.Count && i < prefab.targetCount; i++)
+                        BulletAction.Setup(t[i], transform, prefab.bullet);
+
+                StartCoroutine(ShotFinischEnum());
+                return;
+            }
+
+            if (target == null)
+            {
+                List<ITarget> t = TargetManager.getTargets(transform.position, layer, prefab.range * (isBuffed ? 2 : 1));
+                if (t.Count == 0)
+                    return;
+                setTarget(t[0]);
+            }
+            else if (Vector2.Distance(target.getPosition(), transform.position) > prefab.range * (isBuffed ? 2 : 1))
+            {
+                target = null;
             }
             else
             {
-                if (correction > prefab.turningSpeed * Time.deltaTime)
-                    viewDirection = (viewDirection + prefab.turningSpeed * Time.deltaTime) % 360;
+                float requiredAngle = Vector2.SignedAngle(Vector2.up, target.getPosition() - transform.position) % 360;
+                //float requiredAngle = Vector2.Angle(Vector2.up, target.getPosition() - pos);
+                float correction = requiredAngle - viewDirection;
+                if (correction > 180 || correction < 0)
+                {
+                    correction = 360 - correction;
+                    if (correction > prefab.turningSpeed * Time.deltaTime)
+                        viewDirection = (viewDirection - prefab.turningSpeed * Time.deltaTime) % 360;
+                    else
+                    {
+                        viewDirection = requiredAngle;
+                        Shoot();
+                    }
+                }
                 else
                 {
-                    viewDirection = requiredAngle;
-                    onLookOnIsOn.Invoke();
+                    if (correction > prefab.turningSpeed * Time.deltaTime)
+                        viewDirection = (viewDirection + prefab.turningSpeed * Time.deltaTime) % 360;
+                    else
+                    {
+                        viewDirection = requiredAngle;
+                        Shoot();
+                    }
                 }
+                body.SetFloat("Direction", viewDirection);
             }
+        }catch(MissingReferenceException e)
+        {
+            target = null;
         }
     }
 }
