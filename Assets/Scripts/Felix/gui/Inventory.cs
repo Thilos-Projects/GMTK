@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Random = System.Random;
 
@@ -10,11 +11,13 @@ namespace gui
     public class Inventory : MonoBehaviour
     {
         public GameObject dieA, dieB;
+        public Button rerollButton;
         public GuiManager gui;
         private Image AImage, BImage;
         private Button AButton, BButton;
         public Sprite[] sprites;
         private int[] dice;
+        private bool waveStarted = false;
 
         private void Awake()
         {
@@ -28,6 +31,24 @@ namespace gui
             AButton = dieA.GetComponent<Button>();
             BButton = dieB.GetComponent<Button>();
             rollDice();
+            if (TargetManager.onChangeEnemyCount == null)
+            {
+                TargetManager.onChangeEnemyCount = new UnityEvent<int>();
+            }
+            TargetManager.onChangeEnemyCount.AddListener(onEnemyChange);
+        }
+
+        public void StartWave()
+        {
+            waveStarted = true;
+        }
+
+        public void onEnemyChange(int count)
+        {
+            if (waveStarted && count == 0)
+            {
+                rerollButton.interactable = true;
+            }
         }
 
         public void rollDice()
