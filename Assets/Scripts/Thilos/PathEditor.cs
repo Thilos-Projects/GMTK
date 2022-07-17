@@ -1,3 +1,5 @@
+#if UNITY_EDITOR_64
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -109,3 +111,4 @@ public class PathEditor : MonoBehaviour
         }
     }
 }
+#endif
