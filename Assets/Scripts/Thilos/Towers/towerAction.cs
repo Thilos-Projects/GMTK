@@ -9,7 +9,7 @@ public class towerAction : MonoBehaviour
     public towerScriptableObject prefab;
 
     public int layer;
-    public Vector2Int pos;
+    //public Vector2 pos;
     public float viewDirection;
 
     public bool isSetup = false;
@@ -40,6 +40,19 @@ public class towerAction : MonoBehaviour
     //Setup call
     public void Setup()
     {
+        if(onSetup == null)
+            onSetup = new UnityEvent();
+        if (onSetupFinisch == null)
+            onSetupFinisch = new UnityEvent();
+        if (onShoot == null)
+            onShoot = new UnityEvent();
+        if (onShootFinisch == null)
+            onShootFinisch = new UnityEvent();
+        if (onLookOn == null)
+            onLookOn = new UnityEvent();
+        if (onLookOnIsOn == null)
+            onLookOnIsOn = new UnityEvent();
+
         isSetup = false;
         onSetup.Invoke();
         StartCoroutine(setupFinischEnum());
@@ -55,6 +68,8 @@ public class towerAction : MonoBehaviour
         SetupFinisch();
     }
 
+    public Animator body;
+
     public void Shoot()
     {
         if (target == null)
@@ -62,7 +77,7 @@ public class towerAction : MonoBehaviour
         if(isShooting)
             return;
         isShooting = true;
-        Debug.Log("Shoot");
+        BulletAction.Setup(target, transform, prefab.bullet);
         onShoot.Invoke();
         StartCoroutine(ShotFinischEnum());
     }
@@ -81,43 +96,50 @@ public class towerAction : MonoBehaviour
     {
         if (!isSetup)
             return;
-        if (target == null)
+        try
         {
-            List<ITarget> t = TargetManager.getTargets(pos, layer, prefab.range);
-            if(t.Count == 0)
-                return;
-            setTarget(t[0]);
-        }
-        else if (Vector2.Distance(target.getPosition(), pos) > prefab.range)
-        {
-            target = null;
-        }
-        else
-        {
-            float requiredAngle = Vector2.SignedAngle(Vector2.up, target.getPosition() - pos) % 360;
-            //float requiredAngle = Vector2.Angle(Vector2.up, target.getPosition() - pos);
-            float correction = requiredAngle - viewDirection;
-            if(correction > 180 || correction < 0)
+            if (target == null)
             {
-                correction = 360 - correction;
-                if (correction > prefab.turningSpeed * Time.deltaTime)
-                    viewDirection = (viewDirection - prefab.turningSpeed * Time.deltaTime) % 360;
-                else
-                {
-                    viewDirection = requiredAngle;
-                    onLookOnIsOn.Invoke();
-                }
+                List<ITarget> t = TargetManager.getTargets(transform.position, layer, prefab.range);
+                if (t.Count == 0)
+                    return;
+                setTarget(t[0]);
+            }
+            else if (Vector2.Distance(target.getPosition(), transform.position) > prefab.range)
+            {
+                target = null;
             }
             else
             {
-                if (correction > prefab.turningSpeed * Time.deltaTime)
-                    viewDirection = (viewDirection + prefab.turningSpeed * Time.deltaTime) % 360;
+                float requiredAngle = Vector2.SignedAngle(Vector2.up, target.getPosition() - transform.position) % 360;
+                //float requiredAngle = Vector2.Angle(Vector2.up, target.getPosition() - pos);
+                float correction = requiredAngle - viewDirection;
+                if (correction > 180 || correction < 0)
+                {
+                    correction = 360 - correction;
+                    if (correction > prefab.turningSpeed * Time.deltaTime)
+                        viewDirection = (viewDirection - prefab.turningSpeed * Time.deltaTime) % 360;
+                    else
+                    {
+                        viewDirection = requiredAngle;
+                        onLookOnIsOn.Invoke();
+                    }
+                }
                 else
                 {
-                    viewDirection = requiredAngle;
-                    onLookOnIsOn.Invoke();
+                    if (correction > prefab.turningSpeed * Time.deltaTime)
+                        viewDirection = (viewDirection + prefab.turningSpeed * Time.deltaTime) % 360;
+                    else
+                    {
+                        viewDirection = requiredAngle;
+                        onLookOnIsOn.Invoke();
+                    }
                 }
+                body.SetFloat("Direction", viewDirection);
             }
+        }catch(MissingReferenceException e)
+        {
+            target = null;
         }
     }
 }
