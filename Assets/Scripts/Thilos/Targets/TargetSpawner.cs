@@ -6,6 +6,16 @@ using UnityEngine.Events;
 [RequireComponent(typeof(targetPathGenerator), typeof(TileMapBuilder))]
 public class TargetSpawner : MonoBehaviour
 {
+    public static TargetSpawner instance;
+    public static TargetSpawner getInstance()
+    {
+        return instance;
+    }
+    private void Awake()
+    {
+        instance = this;
+    }
+
     [System.Serializable]
     public struct SpawnEntry
     {
@@ -33,6 +43,15 @@ public class TargetSpawner : MonoBehaviour
     {
         if (toSpawn.Count > 0)
             StartCoroutine(spawnDelay());
+    }
+
+    public int getWaveCount()
+    {
+        int temp = 0;
+        for (int i = 0; i < toSpawn.Count; i++)
+            if (toSpawn[i].isEndOfWave)
+                temp++;
+        return temp;
     }
 
     void Spawn(targerScriptableOBject toSpawn)

@@ -129,7 +129,7 @@ public class standartTarget : MonoBehaviour , ITarget
 
     private void reachedEndOfLine()
     {
-        if(layer == 1)
+        if (layer == 1)
         {
             from = tpg.upperStart;
             transform.position = tpg.tmb.tm.CellToWorld(TileMapBuilder.mapToTile(from)) + new Vector3(0, 0.25f, 0);
@@ -139,8 +139,6 @@ public class standartTarget : MonoBehaviour , ITarget
             TargetManager.moveFromLowerToUpper(this);
         }
         else
-        {
-            Debug.Log("Reached end");
-        }
+            SceenManager.getInstance().onEnemyToBase();
     }
 }

@@ -8,7 +8,7 @@ public class TowerPlacer : MonoBehaviour
 {
     public Tilemap tm;
 
-    bool isInDragMode = true;
+    bool isInDragMode = false;
     public towerScriptableObject towerPrefab;
     public GameObject standartTowerPrefab;
     public GameObject dragPrefab;
@@ -53,6 +53,9 @@ public class TowerPlacer : MonoBehaviour
 
     private void onDragStop()
     {
+        if (!isInDragMode)
+            return;
+
         Destroy(dragObject);
 
         Vector3Int initCell = tm.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
