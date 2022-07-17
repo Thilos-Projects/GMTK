@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61e7375dfa2395d4f8e77ed2c2dd602d, type: 3}
   m_Name: SimpleDamage
   m_EditorClassIdentifier: 
-  aoeChainWidth: 2
-  aoeDelay: 2
-  aoeRange: 5
+  aoeChainLength: 1
+  aoeChainWidth: 5
+  aoeDelay: 0.1
+  aoeRange: 1
   AnimationTimeTurret: 0
   turretImage:
   - {fileID: 0}
   AnimationTimeTarget: 0
   targetImage:
   - {fileID: 0}
-  AnimationTimeLine: 1
+  AnimationTimeLine: 0.1
   lineColor:
   - serializedVersion: 2
     key0: {r: 1, g: 0, b: 0, a: 1}
@@ -54,10 +55,10 @@ MonoBehaviour:
   lineMat: {fileID: 2100000, guid: a29b978d6dca2a64eb6b8602a3b0fa6a, type: 2}
   lineWidth: 0.1
   damage:
-    damage: 0.1
-    dot: 0.01
-    dotTime: 20
-    speedMult: 1
-    speedMultTime: 0
+    damage: 0
+    dot: 2
+    dotTime: 2
+    speedMult: 0.6
+    speedMultTime: 5
     markedTime: 0
     freezTime: 0
