@@ -30,42 +30,24 @@ public class targetPathGenerator : MonoBehaviour
     void buildPath()
     {
         List<Vector2Int> openPositions = new List<Vector2Int>(tmb.path.positionenUnten);
-        Vector2Int currentPos = tmb.path.originePos;
-        lowerStart = currentPos;
-        Vector2Int nextPosition = Vector2Int.zero;
-        while (openPositions.Count > 0)
-        {
-            float dist = float.PositiveInfinity;
-            for (int i = 0; i < openPositions.Count; i++)
-                if (dist > Vector2Int.Distance(currentPos, openPositions[i]))
-                {
-                    dist = Vector2Int.Distance(currentPos, openPositions[i]);
-                    nextPosition = openPositions[i];
-                }
-            if (!directionMapTails.ContainsKey(currentPos))
-                directionMapTails.Add(currentPos, nextPosition);
-            currentPos = nextPosition;
-            openPositions.Remove(currentPos);
-        }
+        lowerStart = tmb.path.originePos;
+
+        if (openPositions[0] != lowerStart)
+            openPositions.Reverse();
+
+        for(int i = 1; i < openPositions.Count; i++)
+            if (!directionMapTails.ContainsKey(openPositions[i - 1]))
+                directionMapTails.Add(openPositions[i-1], openPositions[i]);
 
         openPositions = new List<Vector2Int>(tmb.path.positionenOben);
-        currentPos = tmb.path.holePos;
-        upperStart = currentPos;
-        nextPosition = Vector2Int.zero;
-        while (openPositions.Count > 0)
-        {
-            float dist = float.PositiveInfinity;
-            for (int i = 0; i < openPositions.Count; i++)
-                if (dist > Vector2Int.Distance(currentPos, openPositions[i]))
-                {
-                    dist = Vector2Int.Distance(currentPos, openPositions[i]);
-                    nextPosition = openPositions[i];
-                }
-            if (!directionMapHead.ContainsKey(currentPos) && dist != 0)
-                directionMapHead.Add(currentPos, nextPosition);
-            currentPos = nextPosition;
-            openPositions.Remove(currentPos);
-        }
+        upperStart = tmb.path.holePos;
+
+        if (openPositions[0] != upperStart)
+            openPositions.Reverse();
+
+        for (int i = 1; i < openPositions.Count; i++)
+            if (!directionMapHead.ContainsKey(openPositions[i - 1]))
+                directionMapHead.Add(openPositions[i - 1], openPositions[i]);
     }
 
     Dictionary<Vector2Int, Vector2Int> directionMapTails;

@@ -904,7 +904,12 @@ MonoBehaviour:
     toSpawn:
     - {fileID: 11400000, guid: ff54f82e7e5a1094fb36cb5b2ca7cd8a, type: 2}
   - delay: 5
-    toSpawn: []
+    toSpawn:
+    - {fileID: 11400000, guid: ff54f82e7e5a1094fb36cb5b2ca7cd8a, type: 2}
+    - {fileID: 11400000, guid: ff54f82e7e5a1094fb36cb5b2ca7cd8a, type: 2}
+  - delay: 1
+    toSpawn:
+    - {fileID: 11400000, guid: ff54f82e7e5a1094fb36cb5b2ca7cd8a, type: 2}
   targetPrefab: {fileID: 6071310809825295940, guid: 4d696b3b1645c7948bbd7d56f4e647b4, type: 3}
   parrent: {fileID: 862603043}
 --- !u!1 &1607860146

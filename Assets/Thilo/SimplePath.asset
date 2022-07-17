@@ -12,8 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19414a1d5a7207e4b83d5be02535fc8f, type: 3}
   m_Name: SimplePath
   m_EditorClassIdentifier: 
-  holePos: {x: 0, y: 0}
-  originePos: {x: 0, y: 0}
-  targetPos: {x: 0, y: 0}
-  positionenOben: []
-  positionenUnten: []
+  holePos: {x: 6, y: 10}
+  originePos: {x: 5, y: 57}
+  targetPos: {x: 13, y: 21}
+  positionenOben:
+  - {x: 13, y: 19}
+  - {x: 12, y: 20}
+  - {x: 12, y: 21}
+  - {x: 11, y: 20}
+  - {x: 11, y: 19}
+  - {x: 10, y: 20}
+  - {x: 10, y: 21}
+  - {x: 10, y: 22}
+  - {x: 11, y: 23}
+  - {x: 10, y: 24}
+  - {x: 10, y: 25}
+  - {x: 9, y: 26}
+  - {x: 9, y: 25}
+  - {x: 8, y: 24}
+  - {x: 8, y: 23}
+  - {x: 7, y: 22}
+  - {x: 8, y: 21}
+  - {x: 8, y: 20}
+  - {x: 8, y: 19}
+  - {x: 7, y: 18}
+  - {x: 7, y: 17}
+  - {x: 6, y: 16}
+  - {x: 7, y: 15}
+  - {x: 7, y: 14}
+  - {x: 8, y: 13}
+  - {x: 7, y: 12}
+  - {x: 7, y: 11}
+  - {x: 6, y: 10}
+  positionenUnten:
+  - {x: 6, y: 58}
+  - {x: 7, y: 57}
+  - {x: 7, y: 56}
+  - {x: 8, y: 55}
+  - {x: 8, y: 54}
+  - {x: 9, y: 53}
+  - {x: 10, y: 55}
+  - {x: 9, y: 54}
+  - {x: 10, y: 54}
+  - {x: 11, y: 53}
+  - {x: 10, y: 52}
+  - {x: 11, y: 51}
+  - {x: 11, y: 50}
+  - {x: 12, y: 49}
+  - {x: 11, y: 48}
+  - {x: 11, y: 47}
+  - {x: 10, y: 46}
+  - {x: 10, y: 45}
+  - {x: 9, y: 45}
+  - {x: 9, y: 44}
+  - {x: 8, y: 46}
+  - {x: 8, y: 47}
+  - {x: 7, y: 48}
+  - {x: 7, y: 49}
+  - {x: 6, y: 50}
+  - {x: 6, y: 51}
+  - {x: 5, y: 52}
+  - {x: 5, y: 53}
+  - {x: 4, y: 54}
+  - {x: 5, y: 55}
+  - {x: 5, y: 56}

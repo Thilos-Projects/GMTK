@@ -20,14 +20,16 @@ public class PathEditor : MonoBehaviour
     void Start()
     {
         tm = GetComponent<TileMapBuilder>();
-        InputManager.get().requestInput("PlaceElement", OnClick, false, true, false);
+        InputManager.get().requestInput("ClearPath", clearPath, true, false, false);
+        InputManager.get().requestInput("PlaceElement", OnClickPath, false, false, true);
+        InputManager.get().requestInput("PlaceElement", onClick, true, false, false);
     }
 
-    void OnClick()
+    void onClick()
     {
         Vector2Int mapPos = TileMapBuilder.tileToMap(tm.tm.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
 
-        bool isBottom = mapPos.y > TileMapBuilder.height/2;
+        bool isBottom = mapPos.y > TileMapBuilder.height / 2;
 
         switch (toSet)
         {
@@ -35,22 +37,6 @@ public class PathEditor : MonoBehaviour
                 {
                     if (!isBottom)
                         tm.path.holePos = mapPos;
-                }
-                break;
-            case setAble.path:
-                {
-                    if (isBottom)
-                    {
-                        if (tm.path.positionenUnten.Contains(mapPos))
-                            return;
-                        tm.path.positionenUnten.Add(mapPos);
-                    }
-                    else
-                    {
-                        if (tm.path.positionenOben.Contains(mapPos))
-                            return;
-                        tm.path.positionenOben.Add(mapPos);
-                    }
                 }
                 break;
             case setAble.target:
@@ -81,5 +67,39 @@ public class PathEditor : MonoBehaviour
 
         tm.makeMap();
         tm.printMap();
+    }
+
+    void clearPath()
+    { 
+        tm.path.positionenOben.Clear();
+        tm.path.positionenUnten.Clear();
+        tm.makeMap();
+        tm.printMap();
+    }
+
+    void OnClickPath()
+    {
+        if (toSet == setAble.path)
+        {
+            Vector2Int mapPos = TileMapBuilder.tileToMap(tm.tm.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
+
+            bool isBottom = mapPos.y > TileMapBuilder.height / 2;
+
+            if (isBottom)
+            {
+                if (tm.path.positionenUnten.Contains(mapPos))
+                    return;
+                tm.path.positionenUnten.Add(mapPos);
+            }
+            else
+            {
+                if (tm.path.positionenOben.Contains(mapPos))
+                    return;
+                tm.path.positionenOben.Add(mapPos);
+            }
+
+            tm.makeMap();
+            tm.printMap();
+        }
     }
 }

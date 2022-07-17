@@ -14,6 +14,14 @@ public class standartTarget : MonoBehaviour , ITarget
     float distance;
     float remainingDist;
 
+    public float leben;
+
+    public float freez = 0;
+
+    public float markedTime = 0;
+
+    public float speedMult = 1;
+
     targetPathGenerator tpg;
 
     public int getLayer()
@@ -25,12 +33,42 @@ public class standartTarget : MonoBehaviour , ITarget
     {
         return transform.position;
     }
+    
+    public Transform getTransform()
+    {
+        return transform;
+    }
+
+    public void applyDamage(ITarget.DamageType type)
+    {
+        leben -= type.damage * (markedTime > 0 ? 2 : 1);
+        StartCoroutine(dotFunct(type.dot * (markedTime > 0 ? 2 : 1), type.dotTime * (markedTime > 0 ? 2 : 1)));
+        freez += type.freezTime * (markedTime > 0 ? 2 : 1);
+        speedMult *= type.speedMult / (markedTime > 0 ? 2 : 1);
+        StartCoroutine(speetMultFunct(type.speedMult / (markedTime > 0 ? 2 : 1), type.speedMultTime * (markedTime > 0 ? 2 : 1)));
+        markedTime += type.markedTime * (markedTime > 0 ? 2 : 1);
+    }
+
+    IEnumerator dotFunct(float dot, int dotTime)
+    {
+        for(int i = 0; i < dotTime; i++)
+        {
+            yield return new WaitForSeconds(1);
+            leben -= dot;
+        }
+    }
+    IEnumerator speetMultFunct(float amount, float time)
+    {
+        yield return new WaitForSeconds(time);
+        speedMult /= amount;
+    }
 
     private void Start()
     {
         tpg = targetPathGenerator.getInstance();
         Target();
         TargetManager.addLowerTarget(this);
+        leben = prefab.leben;
     }
 
     void Target()
@@ -45,7 +83,28 @@ public class standartTarget : MonoBehaviour , ITarget
 
     private void Update()
     {
-        if(remainingDist < prefab.speed * Time.deltaTime)
+        if (freez > 0)
+        {
+            freez -= Time.deltaTime;
+            return;
+        }
+        else
+            freez = 0;
+
+        if (markedTime > 0)
+            markedTime -= Time.deltaTime;
+        else
+            markedTime = 0;
+
+        if(leben < 0)
+        {
+            TargetManager.remLowerTarget(this);
+            TargetManager.remUpperTarget(this);
+            Destroy(gameObject);
+            return;
+        }
+
+        if(remainingDist < prefab.speed * speedMult * Time.deltaTime)
         {
             transform.position = tpg.tmb.tm.CellToWorld(TileMapBuilder.mapToTile(to)) + new Vector3(0, 0.25f, 0);
             if (tpg.hasNext(to, layer))
@@ -59,8 +118,8 @@ public class standartTarget : MonoBehaviour , ITarget
         }
         else
         {
-            transform.position += Dir * prefab.speed * Time.deltaTime;
-            remainingDist -= prefab.speed * Time.deltaTime;
+            transform.position += Dir * prefab.speed * speedMult * Time.deltaTime;
+            remainingDist -= prefab.speed * speedMult * Time.deltaTime;
         }
     }
 

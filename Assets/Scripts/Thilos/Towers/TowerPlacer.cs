@@ -79,12 +79,13 @@ public class TowerPlacer : MonoBehaviour
         actionScript.viewDirection = 0;
         actionScript.bodySprite.sprite = towerPrefab.body;
         actionScript.turretSprite.sprite = towerPrefab.turret;
-        if (TileMapBuilder.map[mapPos.x, mapPos.y] > 1)
-            actionScript.prefab = towerPrefab.onPathAlternative;
-        else
-            actionScript.prefab = towerPrefab;
+        actionScript.prefab = towerPrefab;
         actionScript.Setup();
-        
+
+
+        if (TileMapBuilder.map[reverseMapPos.x, reverseMapPos.y] > 1)
+            return;
+
         actionScript = Instantiate(standartTowerPrefab).GetComponent<towerAction>();
         towerMap[reverseMapPos.x, reverseMapPos.y] = actionScript;
         //actionScript.pos = reverseMapPos;
@@ -95,13 +96,8 @@ public class TowerPlacer : MonoBehaviour
         actionScript.prefab = towerPrefab;
         actionScript.bodySprite.sprite = towerPrefab.body;
         actionScript.turretSprite.sprite = towerPrefab.turret;
-        if (TileMapBuilder.map[reverseMapPos.x, reverseMapPos.y] > 1)
-            actionScript.prefab = towerPrefab.reverseTower.onPathAlternative;
-        else
-            actionScript.prefab = towerPrefab.reverseTower;
+        actionScript.prefab = towerPrefab.reverseTower;
         actionScript.Setup();
-
-
     }
 
 }

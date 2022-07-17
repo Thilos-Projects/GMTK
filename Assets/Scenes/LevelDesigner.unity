@@ -781,6 +781,17 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     key: 0
+  - name: ClearPath
+    eu:
+      m_PersistentCalls:
+        m_Calls: []
+    ed:
+      m_PersistentCalls:
+        m_Calls: []
+    e:
+      m_PersistentCalls:
+        m_Calls: []
+    key: 1
 --- !u!4 &1181023415
 Transform:
   m_ObjectHideFlags: 0

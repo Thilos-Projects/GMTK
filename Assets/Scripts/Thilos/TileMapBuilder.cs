@@ -59,6 +59,7 @@ public class TileMapBuilder : MonoBehaviour
 
     public void printMap()
     {
+        tm.ClearAllTiles();
         for (int x = 0; x < width; x++)
             for (int y = 0; y < height; y++)
             {
