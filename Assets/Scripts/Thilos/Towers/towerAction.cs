@@ -43,6 +43,7 @@ public class towerAction : MonoBehaviour
     public bool Upgraded;
     public bool isBuffed;
 
+    public UnityEvent onShoot;
 
     public void Shoot()
     {
@@ -51,6 +52,10 @@ public class towerAction : MonoBehaviour
         if(isShooting)
             return;
         isShooting = true;
+
+        if (onShoot != null)
+            onShoot.Invoke();
+
         if(Upgraded)
             BulletAction.Setup(target, transform, prefab.bulletUpgraded);
         else
