@@ -103,7 +103,10 @@ public class TowerPlacer : MonoBehaviour
 
 
             if (TileMapBuilder.map[reverseMapPos.x, reverseMapPos.y] > 1)
+            {
+                towerPrefab = null;
                 return;
+            }
 
             actionScript = Instantiate(standartTowerPrefab).GetComponent<towerAction>();
             towerMap[reverseMapPos.x, reverseMapPos.y] = actionScript;
@@ -117,6 +120,8 @@ public class TowerPlacer : MonoBehaviour
             actionScript.prefab = towerPrefab.reverseTower;
             actionScript.Setup();
         }
+
+        towerPrefab = null;
     }
 
 }
