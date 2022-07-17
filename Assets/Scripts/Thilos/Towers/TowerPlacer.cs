@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Tilemaps;
 
 public class TowerPlacer : MonoBehaviour
@@ -13,6 +14,8 @@ public class TowerPlacer : MonoBehaviour
     public GameObject dragPrefab;
     GameObject dragObject;
     Transform dragger;
+
+    public UnityEvent onPlace;
 
     public static towerAction[,] towerMap = new towerAction[TileMapBuilder.width, TileMapBuilder.height];
 
@@ -69,6 +72,8 @@ public class TowerPlacer : MonoBehaviour
 
         if (TileMapBuilder.map[mapPos.x, mapPos.y] > 1)
             return;
+
+        onPlace.Invoke();
 
         if (towerMap[mapPos.x, mapPos.y] != null && towerMap[mapPos.x, mapPos.y].prefab == towerPrefab && !towerMap[mapPos.x, mapPos.y].Upgraded)
         {

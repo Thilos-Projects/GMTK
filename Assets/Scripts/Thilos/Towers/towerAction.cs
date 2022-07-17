@@ -100,6 +100,9 @@ public class towerAction : MonoBehaviour
                 if (t.Count == 0)
                     return;
 
+                if (onShoot != null)
+                    onShoot.Invoke();
+
                 isShooting = true;
                 if (Upgraded)
                     for(int i = 0; i < t.Count && i < prefab.targetCount; i++)
