@@ -11,6 +11,7 @@ namespace gui
     public class Inventory : MonoBehaviour
     {
         public GameObject dieA, dieB;
+        public towerScriptableObject[] towers;
         public Button rerollButton;
         public GuiManager gui;
         private Image AImage, BImage;
@@ -18,6 +19,8 @@ namespace gui
         public Sprite[] sprites;
         private int[] dice;
         private bool waveStarted = false;
+        public TowerPlacer tp;
+        private GameObject dieToDeactivate;
 
         private void Awake()
         {
@@ -49,6 +52,7 @@ namespace gui
             {
                 rerollButton.interactable = true;
             }
+            rollDice();
         }
 
         public void rollDice()
@@ -56,8 +60,28 @@ namespace gui
             StartCoroutine(TheySeeMeRolling());
         }
 
+        public void startdragNDrop(int num, GameObject die)
+        {
+            tp.towerPrefab = towers[num - 1];
+            rerollButton.interactable = false;
+            dieToDeactivate = die;
+        }
+
+        public void endDragNDrop()
+        {
+            tp.towerPrefab = null;
+            rerollButton.interactable = false;
+            if (dieToDeactivate.Equals(dieA))
+            {
+                setDice(new[]{0, dice[1]});
+                return;
+            }
+            setDice(new[]{dice[0], 0});
+        }
+
         private IEnumerator TheySeeMeRolling()
         {
+            tp.towerPrefab = null;
             gui.DisableFlip = true;
             var t = Time.time;
             AButton.enabled = false;
