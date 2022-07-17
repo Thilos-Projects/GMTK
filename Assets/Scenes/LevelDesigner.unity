@@ -732,7 +732,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f6ed0cce000fbd4323fd203f8dbe342b, type: 2}
   - {fileID: 11400000, guid: ffa3ba7568455ee28d69f81c9c7cad97, type: 2}
   - {fileID: 11400000, guid: a61c30572e5869d770a9d8a92232c325, type: 2}
-  path: {fileID: 11400000, guid: a1f6d3c9009ddd54d8666ec323a092ff, type: 2}
+  path: {fileID: 11400000, guid: 4a16b366689773546b09ee82cc8704a4, type: 2}
 --- !u!114 &1181023414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1074,6 +1074,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flipSpeed: 3.5
+  inventory: {fileID: 0}
+  rerollButton: {fileID: 0}
   toolPanel: {fileID: 365584233}
 --- !u!1 &2123163485
 GameObject:
