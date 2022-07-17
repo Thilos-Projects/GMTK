@@ -16,6 +16,7 @@ namespace gui
         public GuiManager gui;
         private Image AImage, BImage;
         private Button AButton, BButton;
+        private DiceButton AD, BD;
         public Sprite[] sprites;
         private int[] dice;
         private bool waveStarted = false;
@@ -33,6 +34,8 @@ namespace gui
             BImage = dieB.GetComponent<Image>();
             AButton = dieA.GetComponent<Button>();
             BButton = dieB.GetComponent<Button>();
+            AD = dieA.GetComponent<DiceButton>();
+            BD = dieB.GetComponent<DiceButton>();
             rollDice();
             if (TargetManager.onChangeEnemyCount == null)
             {
@@ -44,15 +47,35 @@ namespace gui
         public void StartWave()
         {
             waveStarted = true;
+            disableInputs();
+        }
+
+        private void disableInputs()
+        {
+            rerollButton.interactable = false;
+            AButton.enabled = false;
+            BButton.enabled = false;
+            AD.enabled = false;
+            BD.enabled = false;
+        }
+
+        private void enableInputs()
+        {
+            rerollButton.interactable = true;
+            AButton.enabled = true;
+            BButton.enabled = true;
+            AD.enabled = true;
+            BD.enabled = true;
         }
 
         public void onEnemyChange(int count)
         {
             if (waveStarted && count == 0)
             {
-                rerollButton.interactable = true;
+                enableInputs();
+                rollDice();
+                waveStarted = false;
             }
-            rollDice();
         }
 
         public void rollDice()
@@ -60,16 +83,15 @@ namespace gui
             StartCoroutine(TheySeeMeRolling());
         }
 
-        public void startdragNDrop(int num, GameObject die)
+        public void startdragNDrop(GameObject die)
         {
-            tp.towerPrefab = towers[num - 1];
+            tp.towerPrefab = towers[(die.Equals(dieA) ? dice[0] : dice[1]) - 1];
             rerollButton.interactable = false;
             dieToDeactivate = die;
         }
 
         public void endDragNDrop()
         {
-            tp.towerPrefab = null;
             rerollButton.interactable = false;
             if (dieToDeactivate.Equals(dieA))
             {
@@ -81,18 +103,21 @@ namespace gui
 
         private IEnumerator TheySeeMeRolling()
         {
-            tp.towerPrefab = null;
             gui.DisableFlip = true;
             var t = Time.time;
             AButton.enabled = false;
             BButton.enabled = false;
+            AD.enabled = false;
+            BD.enabled = false;
             while (Time.time - t < 2)
             {
                 setDice(new[] {UnityEngine.Random.Range(1, 7), UnityEngine.Random.Range(1, 7)});
                 yield return new WaitForSeconds(.1f);
             }
-            AButton.enabled = false;
-            BButton.enabled = false;
+            AButton.enabled = true;
+            BButton.enabled = true;
+            AD.enabled = true;
+            BD.enabled = true;
             gui.DisableFlip = false;
         }
 
