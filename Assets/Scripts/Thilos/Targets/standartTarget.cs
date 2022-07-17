@@ -91,7 +91,16 @@ public class standartTarget : MonoBehaviour , ITarget
 
         animator.SetFloat("xDir" , Dir.x);
         animator.SetFloat("yDir" , Dir.y);
-        animator.SetBool("On Heads", layer == 0);
+        if (layer == 1)
+        {
+            animator.SetBool("On Heads", false);
+            animator.transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else
+        {
+            animator.SetBool("On Heads", true);
+            animator.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
 
         if (freez > 0)
         {

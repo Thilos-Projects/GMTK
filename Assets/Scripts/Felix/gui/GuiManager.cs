@@ -32,8 +32,8 @@ namespace gui
             if(flip != null) StopCoroutine(flip);
 
             stageIsFlipped = !stageIsFlipped;
-            inventory.SetActive(!stageIsFlipped);
-            rerollButton.SetActive(!stageIsFlipped);
+            //inventory.SetActive(!stageIsFlipped);
+            //rerollButton.SetActive(!stageIsFlipped);
 
             flip = StartCoroutine(FlipEnumerator(stageIsFlipped));
         }
