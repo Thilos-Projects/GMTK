@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 257bc5e711c65da49b83839f79691e52, type: 3}
+  m_Name: Tail3
+  m_EditorClassIdentifier: 
+  isWayTower: 0
+  range: 3
+  setupTime: 1
+  cooldown: 3
+  turningSpeed: 2000
+  prefab: {fileID: 9100000, guid: b52ef58692658474aa5553c537a40caf, type: 2}
+  bullet: {fileID: 11400000, guid: 74dbb31b346ce614e90f8260df3ebe53, type: 2}
+  bulletUpgraded: {fileID: 11400000, guid: 41b3f1816df5c4f4a95fc525d054fd18, type: 2}
+  onPathAlternative: {fileID: 0}
+  reverseTower: {fileID: 11400000, guid: a18549b80ea7d9740bd77fb8bfd5e3eb, type: 2}
