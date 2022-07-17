@@ -1648,10 +1648,50 @@ MonoBehaviour:
     delay: 0.5
     toSpawn:
     - {fileID: 11400000, guid: 8c5c600a163fb734e808b5d5cb9d6f51, type: 2}
+  - isEndOfWave: 1
+    delay: 0.5
+    toSpawn:
+    - {fileID: 11400000, guid: 8c5c600a163fb734e808b5d5cb9d6f51, type: 2}
+  - isEndOfWave: 0
+    delay: 0.5
+    toSpawn:
+    - {fileID: 11400000, guid: 044954c651086d54ba8989a063b8f4e6, type: 2}
   - isEndOfWave: 0
     delay: 0.5
     toSpawn:
     - {fileID: 11400000, guid: 8c5c600a163fb734e808b5d5cb9d6f51, type: 2}
+  - isEndOfWave: 0
+    delay: 0.5
+    toSpawn:
+    - {fileID: 11400000, guid: 8c5c600a163fb734e808b5d5cb9d6f51, type: 2}
+  - isEndOfWave: 1
+    delay: 0.5
+    toSpawn:
+    - {fileID: 11400000, guid: 8c5c600a163fb734e808b5d5cb9d6f51, type: 2}
+  - isEndOfWave: 1
+    delay: 0.5
+    toSpawn:
+    - {fileID: 11400000, guid: 8c5c600a163fb734e808b5d5cb9d6f51, type: 2}
+  - isEndOfWave: 0
+    delay: 0.5
+    toSpawn:
+    - {fileID: 11400000, guid: f8c35221de5719a48b2f27b3d1663b3f, type: 2}
+  - isEndOfWave: 0
+    delay: 0.5
+    toSpawn:
+    - {fileID: 11400000, guid: 8c5c600a163fb734e808b5d5cb9d6f51, type: 2}
+  - isEndOfWave: 0
+    delay: 0.5
+    toSpawn:
+    - {fileID: 11400000, guid: 8c5c600a163fb734e808b5d5cb9d6f51, type: 2}
+  - isEndOfWave: 0
+    delay: 0.5
+    toSpawn:
+    - {fileID: 11400000, guid: 044954c651086d54ba8989a063b8f4e6, type: 2}
+  - isEndOfWave: 1
+    delay: 0.5
+    toSpawn:
+    - {fileID: 11400000, guid: 044954c651086d54ba8989a063b8f4e6, type: 2}
   targetPrefab: {fileID: 6071310809825295940, guid: 4d696b3b1645c7948bbd7d56f4e647b4, type: 3}
   parrent: {fileID: 1069190348}
 --- !u!114 &1818724595
