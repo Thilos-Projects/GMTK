@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 257bc5e711c65da49b83839f79691e52, type: 3}
   m_Name: Tail2
   m_EditorClassIdentifier: 
+  targetCount: 0
+  isBuf: 0
   isWayTower: 0
   range: 5
   setupTime: 1
-  cooldown: 4
+  cooldown: 2
   turningSpeed: 2000
   prefab: {fileID: 9100000, guid: a36edb02eb00d414cb78c8c9c0f959d3, type: 2}
   bullet: {fileID: 11400000, guid: 5ede46bb4207a214ebb9594315ff7a93, type: 2}

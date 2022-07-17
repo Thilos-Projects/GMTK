@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 257bc5e711c65da49b83839f79691e52, type: 3}
   m_Name: Tail1
   m_EditorClassIdentifier: 
-  targetCount: 0
+  targetCount: 20
   isBuf: 0
   isWayTower: 0
   range: 3

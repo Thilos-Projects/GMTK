@@ -17,7 +17,7 @@ MonoBehaviour:
   isWayTower: 0
   range: 6
   setupTime: 1
-  cooldown: 5
+  cooldown: 2.5
   turningSpeed: 200
   prefab: {fileID: 9100000, guid: d5699f569e20d5d4f9512f789c02ca14, type: 2}
   bullet: {fileID: 11400000, guid: 714fcfc0718881a4fbeff52d83f76663, type: 2}

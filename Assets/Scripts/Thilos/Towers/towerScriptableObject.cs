@@ -16,7 +16,7 @@ public class towerScriptableObject : ScriptableObject
 
     //public Sprite body;
     //public Sprite turret;
-    public AnimatorController prefab;
+    public RuntimeAnimatorController prefab;
 
     public bulletScriptableObject bullet;
     public bulletScriptableObject bulletUpgraded;
