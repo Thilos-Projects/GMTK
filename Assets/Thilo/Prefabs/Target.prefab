@@ -319,6 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d254ff7179fcb448866e6ba34a868d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 3227773750568494564}
   prefab: {fileID: 0}
   layer: 0
   from: {x: 0, y: 0}

@@ -39,6 +39,8 @@ public class TargetManager
             }
         }
 
+        Debug.Log(targets.Count);
+
         return targets;
     }
 

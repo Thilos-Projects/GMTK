@@ -1648,9 +1648,12 @@ MonoBehaviour:
     delay: 5
     toSpawn:
     - {fileID: 11400000, guid: ff54f82e7e5a1094fb36cb5b2ca7cd8a, type: 2}
+  - isEndOfWave: 1
+    delay: 1
+    toSpawn:
     - {fileID: 11400000, guid: ff54f82e7e5a1094fb36cb5b2ca7cd8a, type: 2}
   - isEndOfWave: 0
-    delay: 1
+    delay: 0
     toSpawn:
     - {fileID: 11400000, guid: ff54f82e7e5a1094fb36cb5b2ca7cd8a, type: 2}
   targetPrefab: {fileID: 6071310809825295940, guid: 4d696b3b1645c7948bbd7d56f4e647b4, type: 3}

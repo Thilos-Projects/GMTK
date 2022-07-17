@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class standartTarget : MonoBehaviour , ITarget
 {
+    public Animator animator;
+
     public targerScriptableOBject prefab;
 
     public int layer;
@@ -86,6 +88,10 @@ public class standartTarget : MonoBehaviour , ITarget
     private void Update()
     {
         LebensLeiste.localScale = new Vector3(LebensLeiste.localScale.z * (leben / prefab.leben), LebensLeiste.localScale.y, LebensLeiste.localScale.z);
+
+        animator.SetFloat("xDir" , Dir.x);
+        animator.SetFloat("yDir" , Dir.y);
+        animator.SetBool("On Heads", layer == 0);
 
         if (freez > 0)
         {
