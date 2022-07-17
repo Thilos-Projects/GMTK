@@ -16,6 +16,7 @@ public class TargetManager
     public static List<ITarget> getTargets(Vector3 pos, int layer, float range)
     {
         List<ITarget> targets = new List<ITarget>();
+        pos.z = 0;
 
         if(layer == 0)
         {
@@ -46,24 +47,28 @@ public class TargetManager
         if (targetsUpper.Contains(target))
             return;
         targetsUpper.Add(target);
-        onChangeEnemyCount.Invoke(getCount());
+        if (onChangeEnemyCount != null)
+            onChangeEnemyCount.Invoke(getCount());
     }
     public static void remUpperTarget(ITarget target)
     {
         targetsUpper.Remove(target);
-        onChangeEnemyCount.Invoke(getCount());
+        if (onChangeEnemyCount != null)
+            onChangeEnemyCount.Invoke(getCount());
     }
     public static void addLowerTarget(ITarget target)
     {
         if (targetsLower.Contains(target))
             return;
         targetsLower.Add(target);
-        onChangeEnemyCount.Invoke(getCount());
+        if (onChangeEnemyCount != null)
+            onChangeEnemyCount.Invoke(getCount());
     }
     public static void remLowerTarget(ITarget target)
     {
         targetsLower.Remove(target);
-        onChangeEnemyCount.Invoke(getCount());
+        if (onChangeEnemyCount != null)
+            onChangeEnemyCount.Invoke(getCount());
     }
 
     public static void moveFromLowerToUpper(ITarget target)

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6071310809664823904}
   - component: {fileID: 6071310809664823905}
+  - component: {fileID: 3227773750568494564}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -84,6 +85,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &3227773750568494564
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6071310809664823907}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6071310809825295940
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,3 +150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d254ff7179fcb448866e6ba34a868d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  layer: 0
+  from: {x: 0, y: 0}
+  to: {x: 0, y: 0}
+  leben: 0
+  freez: 0
+  markedTime: 0
+  speedMult: 1

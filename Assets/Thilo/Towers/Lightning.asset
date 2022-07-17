@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 257bc5e711c65da49b83839f79691e52, type: 3}
-  m_Name: Head5
+  m_Name: Lightning
   m_EditorClassIdentifier: 
+  targetCount: 0
+  isBuf: 0
   isWayTower: 0
-  range: 3
+  range: 5
   setupTime: 1
   cooldown: 2
-  turningSpeed: 200
-  prefab: {fileID: 9100000, guid: 5e143b8e481e0174689106292a7192db, type: 2}
-  bullet: {fileID: 11400000, guid: 341e5726bd448ad4ebbb5f78afcbfdd0, type: 2}
+  turningSpeed: 2000
+  prefab: {fileID: 9100000, guid: 90d36ddcc3c385d439a28ba2b4f7ef1f, type: 2}
+  bullet: {fileID: 11400000, guid: 5ede46bb4207a214ebb9594315ff7a93, type: 2}
+  bulletUpgraded: {fileID: 11400000, guid: 5eaa0d64803672946b904bb09695d6b9, type: 2}
   onPathAlternative: {fileID: 0}
-  reverseTower: {fileID: 11400000, guid: 65a45a0efdb041c49a6cc28ec40c09e8, type: 2}
+  reverseTower: {fileID: 11400000, guid: 41f0657b48be6aa47aa253cc7d960257, type: 2}

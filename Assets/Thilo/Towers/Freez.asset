@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 257bc5e711c65da49b83839f79691e52, type: 3}
-  m_Name: Head6
+  m_Name: Freez
   m_EditorClassIdentifier: 
+  targetCount: 20
+  isBuf: 0
   isWayTower: 0
   range: 3
   setupTime: 1
-  cooldown: 2
-  turningSpeed: 200
-  prefab: {fileID: 9100000, guid: b556cd3c8576ebd47a4cd4d0d93e6c8c, type: 2}
+  cooldown: 1
+  turningSpeed: 2000
+  prefab: {fileID: 9100000, guid: 21b851de26f9a6e4e873d388ed411d6e, type: 2}
   bullet: {fileID: 11400000, guid: 341e5726bd448ad4ebbb5f78afcbfdd0, type: 2}
+  bulletUpgraded: {fileID: 11400000, guid: 0588c2e06e4bc87488bc06c379148bfd, type: 2}
   onPathAlternative: {fileID: 0}
-  reverseTower: {fileID: 11400000, guid: b5ae2dfd9c0d3e14ba501a20f1da21cf, type: 2}
+  reverseTower: {fileID: 11400000, guid: 31d8b20040756344fa8d7ba71cd20e2d, type: 2}

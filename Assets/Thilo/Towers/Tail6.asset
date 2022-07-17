@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Tail6
   m_EditorClassIdentifier: 
   isWayTower: 0
-  range: 3
+  range: 2
   setupTime: 1
-  cooldown: 2
+  cooldown: 0.2
   turningSpeed: 200
   prefab: {fileID: 9100000, guid: 1a0d0ca7ca57e9d498d7ac2d2dfd5d7a, type: 2}
-  bullet: {fileID: 11400000, guid: 341e5726bd448ad4ebbb5f78afcbfdd0, type: 2}
+  bullet: {fileID: 11400000, guid: 888a488553db5004b9d94b8719506097, type: 2}
+  bulletUpgraded: {fileID: 11400000, guid: 6ec52ee5e507bbc45a9bc3e92470ffff, type: 2}
   onPathAlternative: {fileID: 0}
   reverseTower: {fileID: 11400000, guid: 27bc98c49b60e7e49aaa8315b66a7ec5, type: 2}
